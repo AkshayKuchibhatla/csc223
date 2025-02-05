@@ -2,6 +2,7 @@
 #include "LinkedList.h"
 using namespace std;
 
+// ============ NODE ================
 // Default constructor
 Node::Node() {
     cargo = 0;
@@ -33,4 +34,16 @@ string renderListReverse(Node* n) {
         n = n->nextNode;
     }
     return renderedReverseList;
+}
+
+// ============ LINKEDLIST ================
+LinkedList::LinkedList() {
+    numNodes = 0;
+    front = nullptr;
+}
+
+void LinkedList::insertFront(int c) {
+    Node* head = new Node(c, front);
+    front = head;
+    numNodes++;
 }

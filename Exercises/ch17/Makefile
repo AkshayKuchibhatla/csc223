@@ -6,7 +6,7 @@ build/%.o: src/%.cpp
 	@$(CC) -MM -MT $@ $< > build/$*.d
 	@$(CC) -c -o $@ $< -std=$(STD)
 
-build/testLL: build/LinkedList.o build/testLL.o
+build/testLL: build/testLL.o
 	$(CC) -o $@ $^ -std=$(STD)
 
 .PHONY: test clean

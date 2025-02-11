@@ -38,3 +38,6 @@ TEST_CASE("Test to_string_reverse()") {
     CHECK(lnklst->size() == 4);
     CHECK(lnklst->to_string_reverse() == "(10, 20, 30, 40)");
 }
+TEST_CASE("Test string comparison") {
+    CHECK("string1" > "string2");
+}

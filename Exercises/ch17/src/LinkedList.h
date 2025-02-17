@@ -30,6 +30,9 @@ class Node { // A basic node for a linked list
         Node<T>* getNext() {
             return next;
         }
+        void setNext(Node<T>* n) {
+            this->next = n;
+        }
         string to_string() const {
             return std::to_string(cargo);
         }
@@ -213,9 +216,60 @@ class CircleLinkedList: public LinkedList<T> {
     private:
         Node<T>* head; // The first node of the circle
         Node<T>* tail; // The last node of the circle
-    void addFirst(T cargo) {
+    public:
+        Node<T>* getTail() {
+            return this->tail;
+        }
+        CircleLinkedList() {
+            this->head = nullptr;
+            this->tail = nullptr;
+            this->numNodes = 0;
+        }
+        void addNode(T cargo) {
+            Node<T>* n = new Node<T>(cargo, n);
+            n->setNext(head);
+            if (head == nullptr) { // If the list is empty, n just points to itself
+                this->tail = n;
+                this->head = n;
+                head->setNext(tail);
+            } else {
+                tail->setNext(n);
+                tail = n;
+            }
+        }
+        string to_string() const {
+            if (head == nullptr) {
+                return "Empty list";
+            }
+            Node<T>* node = head;
+            string s = "(";
 
-    }
+            while (node != this->tail) {
+                s += node->to_string();
+                node = node->getNext();
+                if (node != this->tail)
+                    s += ", ";
+            }
+            s += ")";
+            return s;
+        }
+        string to_string_reverse() const {
+            if (head == nullptr) {
+                string s = "Empty list";
+                return s;
+            }
+            DoubleNode<T>* node = head;
+            string s = ")";
+
+            while (node != this->tail) {
+                s = node->to_string() + s;
+                node = node->getNext();
+                if (node != this->tail)
+                    s = ", " + s;
+            }
+            s = "(" + s;
+            return s;
+        }
 };
 
 #endif

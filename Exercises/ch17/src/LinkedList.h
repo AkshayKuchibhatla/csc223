@@ -272,4 +272,69 @@ class CircleLinkedList: public LinkedList<T> {
         }
 };
 
+template <class T>
+class OrderedLinkedList: public LinkedList<T> { // A singly-linked list in which the elements are in ascending order.
+    private:
+        Node<T>* head;
+    public:
+        Node<T>* getHead() {
+            return this->head;
+        }
+        OrderedLinkedList() {
+            this->head = nullptr;
+            this->numNodes = 0;
+        }
+        // There cannot be an add first function in OrderedLinkedList, that would ruin the order.
+        void addFirst(T cargo) = delete;
+        // Adds an item to the list
+        void addItem(T c) {
+            this->numNodes++;
+            Node<T>* n = new Node<T>(c);
+            if (head == nullptr || head->getCargo() >= n->getCargo()) {
+                n->setNext(head);
+                head = n;
+            } else {
+                Node<T>* tracker = head;
+                while (tracker->getNext() != nullptr && tracker->getNext()->getCargo() < n->getCargo()) {
+                    tracker = tracker->getNext();
+                }
+                n->setNext(tracker->getNext());
+                tracker->setNext(n);
+            }
+        }
+        string to_string() const {
+            if (head == nullptr) {
+                return "Empty list";
+            }
+            Node<T>* node = head;
+            string s = "(";
+
+            while (node != nullptr) {
+                s += node->to_string();
+                node = node->getNext();
+                if (node != nullptr)
+                    s += ", ";
+            }
+            s += ")";
+            return s;
+        }
+        string to_string_reverse() const {
+            if (head == nullptr) {
+                string s = "Empty list";
+                return s;
+            }
+            Node<T>* node = head;
+            string s = ")";
+
+            while (node != nullptr) {
+                s = node->to_string() + s;
+                node = node->getNext();
+                if (node != nullptr)
+                    s = ", " + s;
+            }
+            s = "(" + s;
+            return s;
+        }
+};
+
 #endif

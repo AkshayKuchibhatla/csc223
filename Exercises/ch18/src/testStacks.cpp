@@ -10,6 +10,7 @@ TEST_CASE("Test basic stack operations on stack of ints") {
     stack.push(11);
     CHECK(stack.top() == 11);
     stack.push(42);
+    CHECK(stack.to_string() == "(42, 11, 9)");
     CHECK(stack.top() == 42);
     CHECK(stack.pop() == 42);
     CHECK(stack.top() == 11);

@@ -17,4 +17,7 @@ class Stack : public LinkedList<T> {
                 throw runtime_error("Cannot return top item of empy stack.");
             return LinkedList<T>::getHead()->getCargo();
         }
+        // string to_string() const {
+        //     return LinkedList<T>::to_string();
+        // }
 };

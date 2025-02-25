@@ -14,10 +14,13 @@ build/%.o: src/%.cpp
 build/%: build/%.o
 	$(CC) -o $@ $^ -std=$(STD)
 
-.PHONY: test clean
+.PHONY: test clean includeDoctest
 
 test: build/testStacks
 	@./build/testStacks
 
 clean:
 	@rm -rf build
+
+includeDoctest:
+	export CPLUS_INCLUDE_PATH=/opt/homebrew/include/doctest

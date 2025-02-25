@@ -80,6 +80,9 @@ class LinkedList { // Singly-linked list
     protected:
         int numNodes; // Number of nodes in the list
     public:
+        bool empty() const {
+            return (this->head == nullptr);
+        }
         Node<T>* getHead() {
             return this->head;
         }

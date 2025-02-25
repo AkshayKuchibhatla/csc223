@@ -16,8 +16,8 @@ build/%: build/%.o
 
 .PHONY: test clean
 
-test: build/testLL
-	@./build/testLL
+test: build/testStacks
+	@./build/testStacks
 
 clean:
 	@rm -rf build

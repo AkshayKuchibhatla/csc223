@@ -1,6 +1,7 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest.h>
-#include "stack.h"
+#include <string>
+#include "Stacks.h"
 
 TEST_CASE("Test basic stack operations on stack of ints") {
     Stack<int> stack;

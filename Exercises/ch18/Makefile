@@ -14,10 +14,13 @@ build/%.o: src/%.cpp
 build/%: build/%.o
 	$(CC) -o $@ $^ -std=$(STD)
 
+build/testEval: build/testEval.o build/Evaluator.o
+	@$(CC) -o $@ $^ -std=$(STD)
+
 .PHONY: test clean includeDoctest
 
-test: build/testStacks
-	@./build/testStacks
+test: build/testEval
+	@./build/testEval
 
 clean:
 	@rm -rf build

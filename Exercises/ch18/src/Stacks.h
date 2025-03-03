@@ -1,3 +1,4 @@
+#pragma once
 #include "../../ch17/src/LinkedList.h"
 
 template <class T>
@@ -17,7 +18,15 @@ class Stack : public LinkedList<T> {
                 throw runtime_error("Cannot return top item of empy stack.");
             return LinkedList<T>::getHead()->getCargo();
         }
-        // string to_string() const {
-        //     return LinkedList<T>::to_string();
-        // }
+        // "Topples" the stack (removes all of its elements)
+        void topple() {
+            while (!LinkedList<T>::empty()) {
+                pop();
+            }
+            LinkedList<T>::numNodes = 0;
+        }
+        // Returns the number of elements in the stack
+        int height() {
+            return LinkedList<T>::size();
+        }
 };

@@ -19,11 +19,10 @@ build/testEval: build/testEval.o build/Evaluator.o
 
 .PHONY: test clean includeDoctest
 
-test: build/testEval
-	@./build/testEval
+test: build/test_queues
+	@./build/test_queues
 
 clean:
 	@rm -rf build
 
-includeDoctest:
-	export CPLUS_INCLUDE_PATH=/opt/homebrew/include/doctest
+# To include doctest on mac: export CPLUS_INCLUDE_PATH=/opt/homebrew/include/doctest

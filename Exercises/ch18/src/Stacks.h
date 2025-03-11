@@ -15,7 +15,7 @@ class Stack : public LinkedList<T> {
         }
         T top() {
             if (LinkedList<T>::empty())
-                throw runtime_error("Cannot return top item of empy stack.");
+                throw runtime_error("Cannot return top item of empty stack.");
             return LinkedList<T>::getHead()->getCargo();
         }
         // "Topples" the stack (removes all of its elements)

@@ -29,6 +29,14 @@ TEST_CASE("Test removeFront() function.") {
     CHECK(lnklst->removeFront() == 40);
     CHECK(lnklst->to_string() == "(30, 20, 10)");
 }
+TEST_CASE("Test remove from end") {
+    LinkedList<int>* lnklst = new LinkedList<int>();
+    lnklst->addEnd(10);
+    lnklst->addEnd(20);
+    lnklst->addEnd(30);
+    lnklst->addEnd(40);
+    CHECK(lnklst->to_string() == "(10, 20, 30, 40)");
+}
 TEST_CASE("Test to_string_reverse()") {
     LinkedList<int>* lnklst = new LinkedList<int>();
     lnklst->addFirst(10);
@@ -37,7 +45,4 @@ TEST_CASE("Test to_string_reverse()") {
     lnklst->addFirst(40);
     CHECK(lnklst->size() == 4);
     CHECK(lnklst->to_string_reverse() == "(10, 20, 30, 40)");
-}
-TEST_CASE("Test string comparison") {
-    CHECK("string1" > "string2");
 }

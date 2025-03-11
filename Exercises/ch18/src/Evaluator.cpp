@@ -35,6 +35,30 @@ int Evaluator::applyOp(int op1, int op2, char oprtr) {
     }
 }
 
+bool Evaluator::isValidNumExp(string expression) {
+    int i;
+    string e = "";
+    
+    for (i = 0; i < expression.length(); i++) {
+        currentChar = expression[i];
+        if (isLeftParen()) {
+            parentheses.push('(');
+        }
+        if (isRightParen()) {
+            if (parentheses.empty()) return false;
+            parentheses.pop();
+        }
+    }
+    if (parentheses.empty())
+        return true;
+    else
+        return false;
+}
+
+int Evaluator::evaluate(string expression) {
+    
+}
+
 // Evaluates whether an infix expression is valid or not
 bool Evaluator::isValidExp(string expression) {
     int i;
@@ -120,11 +144,4 @@ bool Evaluator::isValidExp(string expression) {
     if (operators != operands - 1) return false;
     cout << endl << endl;
     return true;
-}
-
-int Evaluator::evaluate(string expression) {
-    int i;
-    for (i = 0; i < expression.length(); i++) {
-    }
-    return 0.0;
 }

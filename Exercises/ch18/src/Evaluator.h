@@ -8,6 +8,8 @@ class Evaluator {
     private:
         Stack<int> numbers;
         Stack<char> operators;
+        Stack<char> parentheses;
+        vector<string> tokens;
         // Stores the current character being looked
         // at from the expression
         char currentChar;
@@ -28,6 +30,9 @@ class Evaluator {
         // i.e. balanced parentheses, two operands
         // per operator, etc.
         bool isValidExp(string expression);
+        // Checks if a NUMERIC infix expression is
+        // valid or not
+        bool isValidNumExp(string expression);
         // Evaluates a string expression
         int evaluate(string expression);
         // Applies an operation to two operands

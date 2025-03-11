@@ -102,6 +102,20 @@ class LinkedList { // Singly-linked list
             this->head = n;
             this->numNodes++;
         }
+        // Adds a node to the end of the list
+        // @param cargo: the data held by the new ending node
+        void addEnd(T cargo) {
+            numNodes++;
+            if (head == nullptr) { // If list is empty, assign the cargo to head
+                head = new Node<T>(cargo);
+                return;
+            }
+            Node<T>* n = head;
+            while (n->getNext() != nullptr) {
+                n = n->getNext();
+            }
+            n->setNext(new Node<T>(cargo));
+        }
         // Removes the item at the front of the list and returns the data it contains
         T removeFront() {
             if (this->head == nullptr) {

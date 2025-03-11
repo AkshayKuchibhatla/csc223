@@ -4,7 +4,7 @@ STD=c++11
 default:
 	clear
 	@make clean
-	@make orderedTest
+	@make test
 
 build/%.o: src/%.cpp
 	@mkdir -p build
@@ -27,3 +27,5 @@ orderedTest: build/testOLL
 
 clean:
 	@rm -rf build
+
+# When doctest not found (for macs): export CPLUS_INCLUDE_PATH=/opt/homebrew/include/doctest

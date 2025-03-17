@@ -116,6 +116,31 @@ class LinkedList { // Singly-linked list
             }
             n->setNext(new Node<T>(cargo));
         }
+        // Inserts a node into the specified index
+        void insertAt(T cargo, int index) {
+            Node<T>* n = head;
+            int counter = 0;
+            while (n->getNext() != nullptr && counter < index - 1) {
+                n = n->getNext();
+                counter++;
+            }
+            if (n->getNext() == nullptr) throw runtime_error("Error: insertAt() index out of bounds.");
+            Node<T>* newNode = new Node<T>(cargo, n->getNext());
+            n->setNext(newNode);
+            numNodes++;
+        }
+        // Gets the cargo of the node at the specified index
+        T getAt(int index) {
+            Node<T>* n = head;
+            int counter = 0;
+            while (n->getNext() != nullptr && counter < index) {
+                n = n->getNext();
+                counter++;
+            }
+            if (counter != index && n->getNext() == nullptr)
+                throw runtime_error("Error: getAt() index out of bounds.");
+            return n->getCargo();
+        }
         // Removes the item at the front of the list and returns the data it contains
         T removeFront() {
             if (this->head == nullptr) {
@@ -127,6 +152,23 @@ class LinkedList { // Singly-linked list
             delete front;
             numNodes--;
             return frontCargo;
+        }
+        // Removes the the item at the specified index and returns its cargo
+        T removeAt(int index) {
+            Node<T>* n1 = head;
+            int counter = 0;
+            while (n1->getNext() != nullptr && counter < index - 1) {
+                n1 = n1->getNext();
+                counter++;
+            }
+            if (n1->getNext() == nullptr)
+                throw runtime_error("Error: removeAt() index out of bounds.");
+            Node<T>* n2 = n1->getNext()->getNext();
+            Node<T>* mid = n1->getNext();
+            n1->setNext(n2);
+            T midCargo = mid->getCargo();
+            delete mid;
+            return midCargo;
         }
         string to_string() const {
             if (head == nullptr) {

@@ -17,16 +17,6 @@ TEST_CASE("Test empty()") {
 
     rgtpq.insert(redThing);
     CHECK(rgtpq.empty() == false);
-    // CHECK_THROWS_WITH(rgtpq.remove(), "Error: No green items left in queue.");
-
-    // CHECK_THROWS_WITH(rgtpq.remove(), "Error: Cannot dequeue from empty queue.");
-
-    // SUBCASE("Test no red error.") {
-    //     rgtpq.insert(greenThing);
-    //     CHECK_THROWS_WITH(rgtpq.remove(), "Error: No red items left in queue.");
-    // }
-    
-    // CHECK(rgtpq.empty() == true);
 }
 
 TEST_CASE("Test insert() and remove()") {

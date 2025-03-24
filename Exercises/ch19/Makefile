@@ -19,8 +19,8 @@ build/testEval: build/testEval.o build/Evaluator.o
 
 .PHONY: test clean includeDoctest
 
-test: build/test_priorityqueue
-	@./build/test_priorityqueue
+test: build/test_RGTPQ
+	@./build/test_RGTPQ
 
 clean:
 	@rm -rf build

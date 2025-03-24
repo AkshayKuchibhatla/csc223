@@ -16,6 +16,10 @@ class PriorityQueue : public LinkedList<T> {
                 while (n <= LinkedList<T>::length() && LinkedList<T>::get_item_at(n) > cargo) {
                     n++;
                 }
+                if (cargo > LinkedList<T>::get_item_at(n - 1)) {
+                    LinkedList<T>::insert_item_at(cargo, n - 2);
+                    return;
+                }
                 LinkedList<T>::insert_item_at(cargo, n - 1);
             }
         }

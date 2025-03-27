@@ -49,7 +49,7 @@ class RGTPQ : public PriorityQueue<RGThing> {
                         counter--;
                     }
                 }
-                PriorityQueue<RGThing>::LinkedList::insert_item_at(rgt, counter);
+                PriorityQueue<RGThing>::LinkedList::insert_at_end(rgt);
             }
             if (rgt.color == GREEN) {
                 counter = 1;

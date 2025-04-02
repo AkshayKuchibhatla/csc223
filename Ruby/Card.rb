@@ -40,25 +40,53 @@ class Card
   end
 
   def > (crd)
-    if @suit > crd.suit then true end
-    if @suit < crd.suit then false end
+    if @suit > crd.suit then return true end
+    if @suit < crd.suit then return false end
     
-    if @rank > crd.rank then true end
-    if @rank < crd.rank then false end
+    if @rank > crd.rank then return true end
+    if @rank < crd.rank then return false end
     
-    false
+    return false
   end
 
   def < (crd)
-    if @suit > crd.suit then true end
-    if @suit < crd.suit then false end
+    if @suit < crd.suit then return true end
+    if @suit > crd.suit then return false end
     
-    if @rank > crd.rank then true end
-    if @rank < crd.rank then false end
+    if @rank < crd.rank then return true end
+    if @rank > crd.rank then return false end
     
-    false
+    return false
   end
 end
 
-c = Card.new(11, 1)
-puts(c.to_s)
+class Deck
+  attr_accessor :cardsList
+
+  def initialize()
+    @cardsList = []
+    suitValue = 1
+    
+    until suitValue == SUIT.length
+      rankValue = 2
+      until rankValue == RANK.length + 1
+        c = Card.new(rankValue, suitValue)
+        @cardsList.push(c)
+        rankValue += 1
+      end
+      suitValue += 1
+    end
+  end
+
+  def printDeck()
+    @cardsList.each do |card|
+      puts(card.to_s)
+    end 
+  end
+
+  def subDeck(firstIndex, lastIndex)
+    newDeck = Deck.new
+    newDeck.cardsList = self.cardsList[firstIndex..lastIndex]
+    return newDeck
+  end
+end

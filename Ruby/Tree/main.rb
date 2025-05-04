@@ -1,10 +1,13 @@
 require_relative 'Tree'
 
-tree = BinarySearchTree.new(10)
+tree = BinarySearchTree.new
 
-puts(tree.rootNode.left() == nil)
-puts(tree.rootNode.right() == nil)
-puts(tree.rootNode.to_s() == "10")
-tree.rootNode.setLeft(3)
-tree.rootNode.setRight(15)
-puts(tree.rootNode.children.to_s)
+tree.insert(100)
+tree.insert(50)
+tree.insert(150)
+tree.insert(50)
+tree.insert(125)
+tree.insert(175)
+tree.insert(25)
+tree.insert(75)
+tree.inorder(tree.rootNode)

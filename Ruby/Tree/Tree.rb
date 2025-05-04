@@ -15,17 +15,99 @@ class BinarySearchTree
     @rootNode = deleteFromNode(delValue, @rootNode)
   end
 
-  def inorder(root)
+  # Outside function for inorder traversal
+  def in_order_traversal
+    inorderList = []
+    inorder(@rootNode, inorderList)
+    return inorderList
+  end
+
+  # Outside function for preorder traversal
+  def pre_order_traversal
+    preorderList = []
+    preorder(@rootNode, preorderList)
+    return preorderList
+  end
+
+  # Outside function for postorder traversal
+  def post_order_traversal
+    postorderList = []
+    postorder(@rootNode, postorderList)
+    return postorderList
+  end
+
+  def min
+    tempNode = @rootNode
+    while (tempNode != nil and tempNode.children[0] != nil)
+      tempNode = tempNode.children[0]
+    end
+    return tempNode.cargo
+  end
+
+  def max
+    tempNode = @rootNode
+    while (tempNode != nil and tempNode.children[1] != nil)
+      tempNode = tempNode.children[1]
+    end
+    return tempNode.cargo
+  end
+
+  def height
+    return heightFromNode(@rootNode)
+  end
+
+  def empty
+    return @rootNode == nil
+  end
+
+  private
+
+  def heightFromNode(node)
+    if node == nil
+      return -1
+    end
+
+    leftHeight = heightFromNode(node.children[0])
+    rightHeight = heightFromNode(node.children[1])
+
+    if (leftHeight >= rightHeight)
+      return leftHeight + 1
+    else
+      return rightHeight + 1
+    end
+  end
+
+  # Helper function with inorder traversal
+  def inorder(root, arr)
     if root == nil
       return nil
     end
 
-    inorder(root.children[0])
-    printf("%d ", root.to_s)
-    inorder(root.children[1])
+    inorder(root.children[0], arr)
+    arr.append(root.cargo)
+    inorder(root.children[1], arr)
   end
 
-  private
+  def preorder(root, arr)
+    if root == nil
+      return nil
+    end
+
+    arr.append(root.cargo)
+    preorder(root.children[0], arr)
+    preorder(root.children[1], arr)
+  end
+
+  def postorder(root, arr)
+    if root == nil
+      return nil
+    end
+
+    postorder(root.children[0], arr)
+    postorder(root.children[1], arr)
+    arr.append(root.cargo)
+  end
+
   # Helper function for insertion of node
   def insertInNode(val, node)
     if node == nil

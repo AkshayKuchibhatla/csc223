@@ -10,6 +10,22 @@ class BinarySearchTree
     @rootNode = insertInNode(insValue, @rootNode)
   end
 
+  # Outside function for deletion of node
+  def delete(delValue)
+    @rootNode = deleteFromNode(delValue, @rootNode)
+  end
+
+  def inorder(root)
+    if root == nil
+      return nil
+    end
+
+    inorder(root.children[0])
+    printf("%d ", root.to_s)
+    inorder(root.children[1])
+  end
+
+  private
   # Helper function for insertion of node
   def insertInNode(val, node)
     if node == nil
@@ -31,14 +47,41 @@ class BinarySearchTree
     return node
   end
 
-  def inorder(root)
-    if root == nil
-      return nil
+  # Helper function for deletion of node (recursive)
+  def deleteFromNode(x, node) 
+    if node == nil
+      return node
     end
 
-    inorder(root.children[0])
-    printf("%d ", root.cargo)
-    inorder(root.children[1])
+    if node.cargo > x
+      node.children[0] = deleteFromNode(x, node.children[0])
+    elsif node.cargo < x
+      node.children[1] = deleteFromNode(x, node.children[1])
+    else
+      if node.children[0] == nil
+        node = node.children[1]
+        return node
+      end
+
+      if node.children[1] == nil
+        node = node.children[0]
+        return node
+      end
+
+      successor = getInorderSuccessor(node)
+      node.cargo = successor.cargo
+      node.children[1] = deleteFromNode(successor.cargo, node.children[1])
+    end
+    return node
+  end
+
+  # Helper function for node deletion
+  def getInorderSuccessor(currNode)
+    currNode = currNode.children[1]
+    while (currNode != nil and currNode.children[0] != nil)
+      currNode = currNode.children[0]
+    end
+    return currNode
   end
 end
 
@@ -54,38 +97,4 @@ class BinaryNode
   def to_s
     @cargo.to_s
   end
-
-  def left()
-    if @children.length > 0
-      return children[0]
-    else
-      return nil
-    end
-  end
-
-  def right()
-    if @children.length() > 1
-      return children[1]
-    else
-      return nil
-    end
-  end
-
-  def setLeft(number)
-    if @children.length() > 0
-      return nil
-    end
-    puts("setting left")
-    @children << number
-  end
-
-  def setRight(number)
-    puts("setting right")
-    if @children.length() > 1
-      return nil
-    end
-    puts("setting right")
-    @children << number
-  end
-
 end

@@ -11,3 +11,11 @@ tree.insert(175)
 tree.insert(25)
 tree.insert(75)
 tree.inorder(tree.rootNode)
+
+puts
+tree.delete(175)
+tree.inorder(tree.rootNode)
+
+puts
+tree.delete(100)
+tree.inorder(tree.rootNode)

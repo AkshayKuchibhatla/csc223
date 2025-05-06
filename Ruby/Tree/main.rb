@@ -52,3 +52,22 @@ puts
 puts(tree.height)
 tree.insert(80)
 puts(tree.height)
+tree.insert(800)
+tree.insert(801)
+tree.insert(802)
+tree.insert(803)
+puts(tree.height)
+
+puts
+items = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+itemsPreorder = [8,4,2,1,3,6,5,7,12,10,9,11,14,13,15]
+itemsPostorder = [1,3,2,5,7,6,4,9,11,10,13,15,14,12,8]
+
+tree2 = BinarySearchTree.new
+
+for i in 0..items.length - 1
+  tree2.insert(items[i])
+end
+
+puts(tree2.pre_order_traversal == itemsPreorder)
+puts(tree2.post_order_traversal == itemsPostorder)

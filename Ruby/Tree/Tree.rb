@@ -62,6 +62,13 @@ class BinarySearchTree
 
   private
 
+  def getBalance(node)
+    if node == nil
+      return 0
+    end
+    return heightFromNode(node.children[0]) - heightFromNode(node.children[1])
+  end
+
   def heightFromNode(node)
     if node == nil
       return -1
@@ -108,6 +115,26 @@ class BinarySearchTree
     arr.append(root.cargo)
   end
 
+  def rightRotate(node)
+    left = node.children[0]
+    leftRight = left.children[1]
+
+    left.children[1] = node
+    node.children[0] = leftRight
+
+    return left
+  end
+
+  def leftRotate(node)
+    right = node.children[1]
+    rightLeft = right.children[0]
+
+    right.children[0] = node
+    node.children[1] = rightLeft
+
+    return right
+  end
+
   # Helper function for insertion of node
   def insertInNode(val, node)
     if node == nil
@@ -124,6 +151,30 @@ class BinarySearchTree
     # in the children array)
     if node.cargo > val
       node.children[0] = insertInNode(val, node.children[0])
+    end
+
+    balance = getBalance(node)
+
+    # Left Left case
+    if balance > 1 and val < node.children[0].cargo
+      return rightRotate(node)
+    end
+
+    # Right Right case
+    if balance < -1 and val > node.children[1].cargo
+      return leftRotate(node)
+    end
+
+    # Left Right case
+    if balance > 1 and val > node.children[0].cargo
+      node.children[0] = leftRotate(node.children[0])
+      return rightRotate(node)
+    end
+
+    # Right Left case
+    if balance < -1 and val < node.children[1].cargo
+      node.children[1] = leftRotate(node.children[1])
+      return leftRotate(node)
     end
 
     return node

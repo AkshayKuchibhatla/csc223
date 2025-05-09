@@ -1,5 +1,26 @@
 require_relative 'Tree'
 
+def print_tree(node, left_accessor: nil, right_accessor: nil, value_accessor: nil, prefix: "", is_left: true)
+  return if node.nil?
+
+  left_accessor  ||= -> (n) { n.left }
+  right_accessor ||= -> (n) { n.right }
+  value_accessor ||= -> (n) { n.to_s }
+
+  right_child = right_accessor.call(node)
+  left_child  = left_accessor.call(node)
+  
+  print_tree(right_child, left_accessor: left_accessor, right_accessor: right_accessor,
+             value_accessor: value_accessor,
+             prefix: prefix + (is_left ? "│   " : "    "), is_left: false)
+
+  puts prefix + (is_left ? "└── " : "┌── ") + value_accessor.call(node)
+
+  print_tree(left_child, left_accessor: left_accessor, right_accessor: right_accessor,
+             value_accessor: value_accessor,
+             prefix: prefix + (is_left ? "    " : "│   "), is_left: true)
+end
+
 tree = BinarySearchTree.new
 
 puts(tree.empty)
@@ -71,3 +92,14 @@ end
 
 puts(tree2.pre_order_traversal == itemsPreorder)
 puts(tree2.post_order_traversal == itemsPostorder)
+puts
+print("items: ")
+puts(items.to_s)
+puts("AVL tree:")
+
+print_tree(
+  tree2.rootNode,
+  left_accessor: -> (n) { n.children[0] },
+  right_accessor: -> (n) { n.children[1] },
+  value_accessor: -> (n) { n.to_s }
+)
